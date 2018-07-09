@@ -2,6 +2,8 @@
  * jQuery FlexSlider v2.7.1
  * Copyright 2012 WooThemes
  * Contributing Author: Tyler Smith
+ *
+ * Modified by Joel Crawford-Smith to make more accessible.
  */
 ;
 (function ($) {
@@ -238,7 +240,7 @@
               slide = slider.slides.eq(i);
               if ( undefined === slide.attr( 'data-thumb-alt' ) ) { slide.attr( 'data-thumb-alt', '' ); }
               var altText = ( '' !== slide.attr( 'data-thumb-alt' ) ) ? altText = ' alt="' + slide.attr( 'data-thumb-alt' ) + '"' : '';
-              item = (slider.vars.controlNav === "thumbnails") ? '<img src="' + slide.attr( 'data-thumb' ) + '"' + altText + '/>' : '<a href="#">' + j + '</a>';
+              item = (slider.vars.controlNav === "thumbnails") ? '<img src="' + slide.attr( 'data-thumb' ) + '"' + altText + '/>' : '<a href="#"><span class="sr-only">Activate slide ' + j + '</span></a>';
               if ( 'thumbnails' === slider.vars.controlNav && true === slider.vars.thumbCaptions ) {
                 var captn = slide.attr( 'data-thumbcaption' );
                 if ( '' !== captn && undefined !== captn ) { item += '<span class="' + namespace + 'caption">' + captn + '</span>'; }
@@ -308,7 +310,7 @@
         },
         update: function(action, pos) {
           if (slider.pagingCount > 1 && action === "add") {
-            slider.controlNavScaffold.append($('<li><a href="#">' + slider.count + '</a></li>'));
+            slider.controlNavScaffold.append($('<li><a href="#"><span class="sr-only">Activate slide ' + slider.count + '</span></a></li>'));
           } else if (slider.pagingCount === 1) {
             slider.controlNavScaffold.find('li').remove();
           } else {
@@ -320,7 +322,7 @@
       },
       directionNav: {
         setup: function() {
-          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#">' + slider.vars.prevText + '</a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#">' + slider.vars.nextText + '</a></li></ul>');
+          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#"><span class="sr-only">' + slider.vars.prevText + '</span></a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#"><span class="sr-only">' + slider.vars.nextText + '</span></a></li></ul>');
 
           // CUSTOM DIRECTION NAV:
           if (slider.customDirectionNav) {
@@ -960,7 +962,7 @@
             } else {
               slider.newSlides.css({"width": slider.computedW, "marginRight" : slider.computedM, "float": "left", "display": "block"});
             }
-              
+
            }
             else{
               slider.newSlides.css({"width": slider.computedW, "marginRight" : slider.computedM, "float": "left", "display": "block"});
